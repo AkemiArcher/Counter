@@ -50,3 +50,14 @@ h1 {
   background-color: black;
   color: white;
 }
+[data-target="value"][data-state="positive"] {
+  color: green;
+}
+
+[data-target="value"][data-state="negative"] {
+  color: red;
+}
+
+[data-target="value"][data-state="neutral"] {
+  color: black;
+}
