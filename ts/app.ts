@@ -16,9 +16,7 @@ const increase = document.querySelector<HTMLButtonElement>(
 
 let count: number = 0;
 
-let command: string;
-
-function ChangeCounter(action: string) {
+function ChangeCounter(action: string): void {
   switch (action) {
     case "decrease":
       count--;
@@ -35,14 +33,27 @@ function ChangeCounter(action: string) {
   }
 }
 
+function ChangeCounterColor(): void {
+  if (count > 0) {
+    if (counter !== null) counter.style.color = "green";
+  } else if (count < 0) {
+    if (counter !== null) counter.style.color = "red";
+  } else {
+    if (counter !== null) counter.style.color = "black";
+  }
+}
+
 decrease?.addEventListener("click", () => {
   ChangeCounter("decrease");
+  ChangeCounterColor();
 });
 
 reset?.addEventListener("click", () => {
   ChangeCounter("reset");
+  ChangeCounterColor();
 });
 
 increase?.addEventListener("click", () => {
   ChangeCounter("increase");
+  ChangeCounterColor();
 });

@@ -4,7 +4,6 @@ const decrease = document.querySelector('[data-action="decrease"]');
 const reset = document.querySelector('[data-action="reset"]');
 const increase = document.querySelector('[data-action="increase"]');
 let count = 0;
-let command;
 function ChangeCounter(action) {
     switch (action) {
         case "decrease":
@@ -21,12 +20,29 @@ function ChangeCounter(action) {
         counter.textContent = count.toString();
     }
 }
+function ChangeCounterColor() {
+    if (count > 0) {
+        if (counter !== null)
+            counter.style.color = "green";
+    }
+    else if (count < 0) {
+        if (counter !== null)
+            counter.style.color = "red";
+    }
+    else {
+        if (counter !== null)
+            counter.style.color = "black";
+    }
+}
 decrease?.addEventListener("click", () => {
     ChangeCounter("decrease");
+    ChangeCounterColor();
 });
 reset?.addEventListener("click", () => {
     ChangeCounter("reset");
+    ChangeCounterColor();
 });
 increase?.addEventListener("click", () => {
     ChangeCounter("increase");
+    ChangeCounterColor();
 });
