@@ -1,4 +1,4 @@
-const counter = document.querySelector<HTMLSpanElement>(
+const counterElement = document.querySelector<HTMLSpanElement>(
   '[data-target="value"]',
 );
 
@@ -16,7 +16,7 @@ const increase = document.querySelector<HTMLButtonElement>(
 
 let count: number = 0;
 
-function ChangeCounter(action: string): void {
+function updateCounter(action: string): void {
   switch (action) {
     case "decrease":
       count--;
@@ -28,32 +28,34 @@ function ChangeCounter(action: string): void {
       count++;
       break;
   }
-  if (counter !== null) {
-    counter.textContent = count.toString();
+  if (counterElement !== null) {
+    counterElement.textContent = count.toString();
   }
 }
 
-function ChangeCounterColor(): void {
-  if (count > 0) {
-    if (counter !== null) counter.style.color = "green";
-  } else if (count < 0) {
-    if (counter !== null) counter.style.color = "red";
-  } else {
-    if (counter !== null) counter.style.color = "black";
+function render(): void {
+  if (counterElement !== null) {
+    if (count > 0) {
+      counterElement.dataset.state = "positive";
+    } else if (count < 0) {
+      counterElement.dataset.state = "negative";
+    } else {
+      counterElement.dataset.state = "neutral";
+    }
   }
 }
 
 decrease?.addEventListener("click", () => {
-  ChangeCounter("decrease");
-  ChangeCounterColor();
+  updateCounter("decrease");
+  render();
 });
 
 reset?.addEventListener("click", () => {
-  ChangeCounter("reset");
-  ChangeCounterColor();
+  updateCounter("reset");
+  render();
 });
 
 increase?.addEventListener("click", () => {
-  ChangeCounter("increase");
-  ChangeCounterColor();
+  updateCounter("increase");
+  render();
 });

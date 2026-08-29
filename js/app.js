@@ -1,10 +1,10 @@
 "use strict";
-const counter = document.querySelector('[data-target="value"]');
+const counterElement = document.querySelector('[data-target="value"]');
 const decrease = document.querySelector('[data-action="decrease"]');
 const reset = document.querySelector('[data-action="reset"]');
 const increase = document.querySelector('[data-action="increase"]');
 let count = 0;
-function ChangeCounter(action) {
+function updateCounter(action) {
     switch (action) {
         case "decrease":
             count--;
@@ -16,33 +16,32 @@ function ChangeCounter(action) {
             count++;
             break;
     }
-    if (counter !== null) {
-        counter.textContent = count.toString();
+    if (counterElement !== null) {
+        counterElement.textContent = count.toString();
     }
 }
-function ChangeCounterColor() {
-    if (count > 0) {
-        if (counter !== null)
-            counter.style.color = "green";
-    }
-    else if (count < 0) {
-        if (counter !== null)
-            counter.style.color = "red";
-    }
-    else {
-        if (counter !== null)
-            counter.style.color = "black";
+function render() {
+    if (counterElement !== null) {
+        if (count > 0) {
+            counterElement.dataset.state = "positive";
+        }
+        else if (count < 0) {
+            counterElement.dataset.state = "negative";
+        }
+        else {
+            counterElement.dataset.state = "neutral";
+        }
     }
 }
 decrease?.addEventListener("click", () => {
-    ChangeCounter("decrease");
-    ChangeCounterColor();
+    updateCounter("decrease");
+    render();
 });
 reset?.addEventListener("click", () => {
-    ChangeCounter("reset");
-    ChangeCounterColor();
+    updateCounter("reset");
+    render();
 });
 increase?.addEventListener("click", () => {
-    ChangeCounter("increase");
-    ChangeCounterColor();
+    updateCounter("increase");
+    render();
 });
