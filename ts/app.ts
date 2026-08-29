@@ -21,13 +21,13 @@ let command: string;
 function ChangeCounter(action: string) {
   switch (action) {
     case "decrease":
-      count++;
-      break;
-    case "reset":
       count--;
       break;
+    case "reset":
+      count = 0;
+      break;
     case "increase":
-      count == 0;
+      count++;
       break;
   }
   if (counter !== null) {
@@ -40,10 +40,7 @@ decrease?.addEventListener("click", () => {
 });
 
 reset?.addEventListener("click", () => {
-  if (counter !== null) {
-    count = 0;
-    counter.textContent = count.toString();
-  }
+  ChangeCounter("reset");
 });
 
 increase?.addEventListener("click", () => {
